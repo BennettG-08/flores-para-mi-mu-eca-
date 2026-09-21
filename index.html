@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080806">
-
-<title>Para Mar&iacute;a, mi princesa preciosa</title>
-
-<style>
+<title>Para María, mi princesa preciosa</title><style>
 
 *{
     box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
     margin:0;
+    width:100%;
     min-height:100%;
     font-family:Georgia,"Times New Roman",serif;
     background:#080806;
@@ -26,13 +24,14 @@ body{
 }
 
 .scene{
-    min-height:100vh;
     position:relative;
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
-    overflow:hidden;
 
     background:
         radial-gradient(
@@ -47,6 +46,9 @@ body{
             #090806 100%
         );
 }
+
+
+/* FONDOS */
 
 .stars,
 .petals,
@@ -68,16 +70,16 @@ body{
 }
 
 @keyframes twinkle{
+
     50%{
         opacity:.15;
         transform:scale(.6);
     }
+
 }
 
 
-/* =========================
-   TARJETAS
-========================= */
+/* TARJETAS */
 
 .card,
 .section{
@@ -91,33 +93,16 @@ body{
     border-radius:28px;
 
     background:rgba(8,8,6,.72);
-    backdrop-filter:blur(8px);
 
-    box-shadow:0 20px 80px rgba(0,0,0,.55);
+    box-shadow:
+        0 20px 80px rgba(0,0,0,.55);
+
+    backdrop-filter:blur(8px);
 }
 
 .card{
-    display:none;
-    opacity:0;
-}
-
-.card.show{
     display:block;
-    animation:cardReveal 1.2s ease forwards;
-}
-
-@keyframes cardReveal{
-
-    from{
-        opacity:0;
-        transform:translateY(25px) scale(.97);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-
+    animation:appear .9s ease;
 }
 
 .section{
@@ -143,6 +128,9 @@ body{
 
 }
 
+
+/* TEXTO */
+
 .small{
     letter-spacing:4px;
     text-transform:uppercase;
@@ -151,11 +139,17 @@ body{
 }
 
 h1{
-    font-size:clamp(44px,11vw,78px);
+    font-size:clamp(42px,11vw,76px);
     line-height:.95;
     margin:18px 0 20px;
     color:#ffd84d;
     font-style:italic;
+}
+
+h2{
+    color:#ffd84d;
+    font-size:clamp(26px,7vw,40px);
+    line-height:1.15;
 }
 
 .intro{
@@ -166,31 +160,9 @@ h1{
     color:#f5eee0;
 }
 
-button{
-    border:1px solid #e9bf31;
-    background:rgba(15,13,8,.9);
-    color:#ffe071;
-
-    padding:15px 27px;
-
-    border-radius:999px;
-
-    font-size:16px;
-    cursor:pointer;
-
-    margin-top:28px;
-
-    transition:.25s transform,.25s background;
-}
-
-button:hover{
-    transform:translateY(-2px);
-    background:rgba(66,50,10,.8);
-}
-
 .section p{
     font-size:20px;
-    line-height:1.75;
+    line-height:1.7;
     margin:15px 0;
 }
 
@@ -222,9 +194,34 @@ button:hover{
 }
 
 
-/* =========================
-   FLORES GRANDES Y ALTAS
-========================= */
+/* BOTONES */
+
+button{
+    border:1px solid #e9bf31;
+    background:rgba(15,13,8,.9);
+    color:#ffe071;
+
+    padding:15px 27px;
+
+    border-radius:999px;
+
+    font-size:16px;
+    cursor:pointer;
+
+    margin-top:28px;
+
+    transition:
+        transform .25s,
+        background .25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    background:rgba(66,50,10,.8);
+}
+
+
+/* FLORES */
 
 .flower{
     position:absolute;
@@ -236,30 +233,29 @@ button:hover{
 
     transform-origin:center bottom;
 
+    opacity:0;
+
     animation:
-        flowerAppear 2.2s ease-out forwards,
+        flowerAppear 1.8s ease-out forwards,
         flowerSway 3s ease-in-out infinite;
 
-    filter:drop-shadow(
-        0 0 12px rgba(255,200,40,.48)
-    );
-
-    opacity:0;
+    filter:
+        drop-shadow(
+            0 0 12px rgba(255,200,40,.48)
+        );
 }
 
 @keyframes flowerAppear{
 
     from{
         opacity:0;
-
         transform:
-            translateY(100px)
+            translateY(80px)
             scale(calc(var(--scale) * .6));
     }
 
     to{
         opacity:1;
-
         transform:
             translateY(0)
             scale(var(--scale));
@@ -269,7 +265,8 @@ button:hover{
 
 @keyframes flowerSway{
 
-    0%,100%{
+    0%,
+    100%{
         margin-left:0;
     }
 
@@ -321,7 +318,9 @@ button:hover{
     right:7px;
     top:125px;
 
-    transform:scaleX(-1) rotate(25deg);
+    transform:
+        scaleX(-1)
+        rotate(25deg);
 }
 
 
@@ -338,7 +337,7 @@ button:hover{
 }
 
 
-/* P&Eacute;TALOS */
+/* PÉTALOS */
 
 .petal{
     position:absolute;
@@ -346,18 +345,21 @@ button:hover{
     width:36px;
     height:53px;
 
-    background:linear-gradient(
-        145deg,
-        #fff079,
-        #ffd21f
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #fff079,
+            #ffd21f
+        );
 
-    border-radius:50% 50% 45% 45%;
+    border-radius:
+        50% 50% 45% 45%;
 
     left:28px;
     top:18px;
 
-    transform-origin:18px 26px;
+    transform-origin:
+        18px 26px;
 
     box-shadow:
         inset 0 2px 6px rgba(255,255,255,.38),
@@ -365,27 +367,39 @@ button:hover{
 }
 
 .p1{
-    transform:rotate(0deg) translateY(-28px);
+    transform:
+        rotate(0deg)
+        translateY(-28px);
 }
 
 .p2{
-    transform:rotate(60deg) translateY(-28px);
+    transform:
+        rotate(60deg)
+        translateY(-28px);
 }
 
 .p3{
-    transform:rotate(120deg) translateY(-28px);
+    transform:
+        rotate(120deg)
+        translateY(-28px);
 }
 
 .p4{
-    transform:rotate(180deg) translateY(-28px);
+    transform:
+        rotate(180deg)
+        translateY(-28px);
 }
 
 .p5{
-    transform:rotate(240deg) translateY(-28px);
+    transform:
+        rotate(240deg)
+        translateY(-28px);
 }
 
 .p6{
-    transform:rotate(300deg) translateY(-28px);
+    transform:
+        rotate(300deg)
+        translateY(-28px);
 }
 
 
@@ -408,9 +422,7 @@ button:hover{
 }
 
 
-/* =========================
-   P&Eacute;TALOS QUE CAEN
-========================= */
+/* PÉTALOS QUE CAEN */
 
 .falling{
     position:absolute;
@@ -420,13 +432,15 @@ button:hover{
     width:14px;
     height:22px;
 
-    border-radius:100% 0 100% 0;
+    border-radius:
+        100% 0 100% 0;
 
     background:#ffd21f;
 
     opacity:.9;
 
-    animation:fall linear forwards;
+    animation:
+        fall linear forwards;
 }
 
 @keyframes fall{
@@ -447,9 +461,7 @@ button:hover{
 }
 
 
-/* =========================
-   BRILLOS
-========================= */
+/* BRILLOS */
 
 .spark{
     position:absolute;
@@ -461,9 +473,11 @@ button:hover{
 
     background:#ffd95b;
 
-    box-shadow:0 0 14px #ffd95b;
+    box-shadow:
+        0 0 14px #ffd95b;
 
-    animation:float 4s ease-in-out infinite;
+    animation:
+        float 4s ease-in-out infinite;
 }
 
 @keyframes float{
@@ -475,14 +489,8 @@ button:hover{
 
 }
 
-.restart{
-    margin-top:20px;
-}
 
-
-/* =========================
-   CELULAR
-========================= */
+/* CELULAR */
 
 @media(max-width:480px){
 
@@ -494,6 +502,10 @@ button:hover{
     .intro,
     .section p{
         font-size:17px;
+    }
+
+    h1{
+        font-size:clamp(40px,12vw,58px);
     }
 
     .flower{
@@ -518,281 +530,236 @@ button:hover{
 }
 
 
-/* =========================
-   MENOS MOVIMIENTO
-========================= */
+/* MENOS MOVIMIENTO */
 
 @media(prefers-reduced-motion:reduce){
 
     *,
-    *:before,
-    *:after{
+    *::before,
+    *::after{
         animation-duration:.001ms!important;
         animation-iteration-count:1!important;
     }
 
 }
 
-</style>
-</head>
+</style></head><body><main class="scene" id="scene"><div class="stars" id="stars"></div>
+
+<div class="petals" id="petals"></div>
+
+<div class="flowers" id="flowers"></div>
 
 
-<body>
+<!-- PARTE 1 -->
 
-<main class="scene" id="scene">
+<section class="card" id="introCard">
 
-    <div class="stars" id="stars"></div>
+    <div class="small">
+        Un detalle hecho especialmente para ti
+    </div>
 
-    <div class="petals" id="petals"></div>
+    <h1>
+        Para mi princesa preciosa<br>
+        María
+    </h1>
 
-    <div class="flowers" id="flowers"></div>
+    <p class="intro">
+        Hoy es el día de las flores y aunque no pueda darte
+        un ramo en persona, quería hacerte algo especial,
+        algo hecho con todo lo que siento por ti.
+    </p>
 
+    <button id="openBtn">
+        Abrir mi regalo
+    </button>
 
-    <!-- =========================
-         PARTE 1
-    ========================== -->
-
-    <section class="card" id="introCard">
-
-        <div class="small">
-            Un detalle hecho especialmente para ti
-        </div>
-
-        <h1>
-            Para mi princesa preciosa<br>
-            Mar&iacute;a
-        </h1>
-
-        <p class="intro">
-            Hoy es el d&iacute;a de las flores y aunque no pueda darte
-            un ramo en persona, quer&iacute;a hacerte algo especial,
-            algo hecho con todo lo que siento por ti.
-        </p>
-
-        <button id="openBtn">
-            Abrir mi regalo
-        </button>
-
-    </section>
+</section>
 
 
-    <!-- =========================
-         PARTE 2
-    ========================== -->
+<!-- PARTE 2 -->
 
-    <section class="section" id="messageSection">
+<section class="section" id="messageSection">
 
-        <div class="small">
-            Para ti
-        </div>
+    <div class="small">
+        Para ti
+    </div>
 
-        <span class="heart">
-            &#10084;
-        </span>
+    <span class="heart">
+        &#10084;
+    </span>
 
-        <p>
-            No s&eacute; c&oacute;mo explicarte todo lo que siento,
-            pero s&iacute; s&eacute; que cuando est&aacute;s, todo se siente mejor.
-        </p>
+    <p>
+        No sé cómo explicarte todo lo que siento,
+        pero sí sé que cuando estás, todo se siente mejor.
+    </p>
 
-        <p>
-            Gracias por ser esa persona tan especial, por tu sonrisa
-            y por hacerme sentir en paz.
-        </p>
+    <p>
+        Gracias por ser esa persona tan especial, por tu sonrisa
+        y por hacerme sentir en paz.
+    </p>
 
-        <p class="quote">
-            Te mereces todo lo bonito del mundo... y m&aacute;s.
-        </p>
+    <p class="quote">
+        Te mereces todo lo bonito del mundo... y más.
+    </p>
 
-        <button id="continueBtn">
-            Hay algo m&aacute;s
-        </button>
+    <button id="continueBtn">
+        Hay algo más
+    </button>
 
-    </section>
+</section>
 
 
-    <!-- =========================
-         PARTE 3
-    ========================== -->
+<!-- PARTE 3 -->
 
-    <section class="section" id="finalSection">
+<section class="section" id="finalSection">
 
-        <div class="small">
-            Un &uacute;ltimo detalle
-        </div>
+    <div class="small">
+        Un último detalle
+    </div>
 
-        <h2>
-            Puede que estas flores sean digitales...
-        </h2>
+    <h2>
+        Puede que estas flores sean digitales...
+    </h2>
 
-        <p>
-            pero lo que siento por ti no lo es.
-        </p>
+    <p>
+        pero lo que siento por ti no lo es.
+    </p>
 
-        <span class="heart">
-            &#10084;
-        </span>
+    <span class="heart">
+        &#10084;
+    </span>
 
-        <p>
-            Gracias por existir, por estar en mi vida y por hacer
-            mis d&iacute;as un poquito m&aacute;s bonitos.
-        </p>
+    <p>
+        Gracias por existir, por estar en mi vida y por hacer
+        mis días un poquito más bonitos.
+    </p>
 
-        <p class="quote">
-            Feliz d&iacute;a de las flores, mi amor
-        </p>
+    <p class="quote">
+        Feliz día de las flores, mi amor
+    </p>
 
-        <p class="signature">
-            Siempre contigo.
-        </p>
+    <p class="signature">
+        Siempre contigo.
+    </p>
 
-        <button class="restart" id="restartBtn">
-            Volver al inicio
-        </button>
+    <button class="restart" id="restartBtn">
+        Volver al inicio
+    </button>
 
-    </section>
+</section>
 
-</main>
+</main><script>
+
+/* ELEMENTOS */
+
+const scene = document.getElementById("scene");
+const stars = document.getElementById("stars");
+const flowers = document.getElementById("flowers");
+const petals = document.getElementById("petals");
+
+const introCard = document.getElementById("introCard");
+const messageSection = document.getElementById("messageSection");
+const finalSection = document.getElementById("finalSection");
+
+const openBtn = document.getElementById("openBtn");
+const continueBtn = document.getElementById("continueBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+const reduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
 
 
-<script>
-
-const scene =
-    document.getElementById("scene");
-
-const stars =
-    document.getElementById("stars");
-
-const flowers =
-    document.getElementById("flowers");
-
-const petals =
-    document.getElementById("petals");
-
-const introCard =
-    document.getElementById("introCard");
-
-const messageSection =
-    document.getElementById("messageSection");
-
-const finalSection =
-    document.getElementById("finalSection");
-
-const openBtn =
-    document.getElementById("openBtn");
-
-const continueBtn =
-    document.getElementById("continueBtn");
-
-const restartBtn =
-    document.getElementById("restartBtn");
-
-const reduced =
-    window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
+/* NÚMEROS ALEATORIOS */
 
 function rand(min,max){
 
-    return Math.random()*(max-min)+min;
+    return Math.random() * (max - min) + min;
 
 }
 
 
-/* =========================
-   ESTRELLAS
-========================= */
+/* ESTRELLAS */
 
-for(let i=0;i<70;i++){
+for(let i = 0; i < 70; i++){
 
-    const s =
+    const star =
         document.createElement("span");
 
-    s.className="star";
+    star.className = "star";
 
-    s.style.left =
-        rand(0,100)+"%";
+    star.style.left =
+        rand(0,100) + "%";
 
-    s.style.top =
-        rand(0,75)+"%";
+    star.style.top =
+        rand(0,75) + "%";
 
-    s.style.animationDelay =
-        rand(0,3)+"s";
+    star.style.animationDelay =
+        rand(0,3) + "s";
 
-    stars.appendChild(s);
+    stars.appendChild(star);
 
 }
 
 
-/* =========================
-   CREAR FLORES
-========================= */
+/* CREAR UNA FLOR */
 
-function makeFlower(
-    x,
-    y,
-    scale,
-    delay
-){
+function makeFlower(x,y,scale,delay){
 
-    const f =
+    const flower =
         document.createElement("div");
 
-    f.className="flower";
+    flower.className = "flower";
 
-    f.style.left =
-        x+"%";
+    flower.style.left =
+        x + "%";
 
-    f.style.bottom =
-        y+"px";
+    flower.style.bottom =
+        y + "px";
 
-    f.style.setProperty(
+    flower.style.setProperty(
         "--scale",
         scale
     );
 
-    f.style.animationDelay =
-        delay+"s,"+
-        delay+"s";
+    flower.style.animationDelay =
+        delay + "s," +
+        delay + "s";
 
-    f.innerHTML=
+    flower.innerHTML =
 
-        '<div class="stem"></div>'+
+        '<div class="stem"></div>' +
 
-        '<div class="leaf a"></div>'+
+        '<div class="leaf a"></div>' +
 
-        '<div class="leaf b"></div>'+
+        '<div class="leaf b"></div>' +
 
-        '<div class="head">'+
+        '<div class="head">' +
 
-        '<span class="petal p1"></span>'+
+        '<span class="petal p1"></span>' +
 
-        '<span class="petal p2"></span>'+
+        '<span class="petal p2"></span>' +
 
-        '<span class="petal p3"></span>'+
+        '<span class="petal p3"></span>' +
 
-        '<span class="petal p4"></span>'+
+        '<span class="petal p4"></span>' +
 
-        '<span class="petal p5"></span>'+
+        '<span class="petal p5"></span>' +
 
-        '<span class="petal p6"></span>'+
+        '<span class="petal p6"></span>' +
 
-        '<span class="center"></span>'+
+        '<span class="center"></span>' +
 
         '</div>';
 
-    flowers.appendChild(f);
+    flowers.appendChild(flower);
 
 }
 
 
-/* =========================
-   MUCHAS FLORES
-   ALTAS Y VISIBLES
-========================= */
+/* FLORES ALTAS */
 
-for(let i=0;i<22;i++){
+for(let i = 0; i < 22; i++){
 
     makeFlower(
         rand(-5,93),
@@ -804,41 +771,41 @@ for(let i=0;i<22;i++){
 }
 
 
-/* =========================
-   P&Eacute;TALOS
-========================= */
+/* PÉTALOS */
 
-function burstPetals(count=80){
+function burstPetals(count){
 
     if(reduced){
-        count=25;
+        count = 25;
     }
 
-    for(let i=0;i<count;i++){
+    for(let i = 0; i < count; i++){
 
-        const p =
+        const petal =
             document.createElement("span");
 
-        p.className="falling";
+        petal.className = "falling";
 
-        p.style.left =
-            rand(0,100)+"%";
+        petal.style.left =
+            rand(0,100) + "%";
 
-        p.style.setProperty(
+        petal.style.setProperty(
             "--drift",
-            rand(-180,180)+"px"
+            rand(-180,180) + "px"
         );
 
-        p.style.animationDuration =
-            rand(3.5,7)+"s";
+        petal.style.animationDuration =
+            rand(3.5,7) + "s";
 
-        p.style.animationDelay =
-            rand(0,2.2)+"s";
+        petal.style.animationDelay =
+            rand(0,2.2) + "s";
 
-        petals.appendChild(p);
+        petals.appendChild(petal);
 
         setTimeout(
-            ()=>p.remove(),
+            function(){
+                petal.remove();
+            },
             9000
         );
 
@@ -847,26 +814,28 @@ function burstPetals(count=80){
 
     /* BRILLOS */
 
-    for(let i=0;i<25;i++){
+    for(let i = 0; i < 25; i++){
 
-        const s =
+        const spark =
             document.createElement("span");
 
-        s.className="spark";
+        spark.className = "spark";
 
-        s.style.left =
-            rand(5,95)+"%";
+        spark.style.left =
+            rand(5,95) + "%";
 
-        s.style.top =
-            rand(10,90)+"%";
+        spark.style.top =
+            rand(10,90) + "%";
 
-        s.style.animationDelay =
-            rand(0,2)+"s";
+        spark.style.animationDelay =
+            rand(0,2) + "s";
 
-        scene.appendChild(s);
+        scene.appendChild(spark);
 
         setTimeout(
-            ()=>s.remove(),
+            function(){
+                spark.remove();
+            },
             6000
         );
 
@@ -875,69 +844,17 @@ function burstPetals(count=80){
 }
 
 
-/* =========================
-   FLORES PRIMERO
-   TEXTO DESPU&Eacute;S
-========================= */
-
-let introTimer;
-
-function showIntro(){
-
-    clearTimeout(introTimer);
-
-    introCard.classList.remove("show");
-
-    introCard.style.display="none";
-
-    introTimer =
-        setTimeout(
-            ()=>{
-
-                introCard.style.display="block";
-
-                requestAnimationFrame(
-                    ()=>{
-
-                        introCard.classList.add("show");
-
-                    }
-                );
-
-            },
-            3800
-        );
-
-}
-
-
-/* INICIO */
-
-showIntro();
-
-
-/* =========================
-   PARTE 1  PARTE 2
-========================= */
+/* ABRIR REGALO */
 
 openBtn.addEventListener(
     "click",
-    ()=>{
+    function(){
 
-        introCard.classList.remove("show");
+        introCard.style.display = "none";
 
-        setTimeout(
-            ()=>{
+        messageSection.style.display = "block";
 
-                introCard.style.display="none";
-
-                messageSection.style.display="block";
-
-                messageSection.classList.add("show");
-
-            },
-            150
-        );
+        messageSection.classList.add("show");
 
         burstPetals(110);
 
@@ -945,28 +862,19 @@ openBtn.addEventListener(
 );
 
 
-/* =========================
-   PARTE 2  PARTE 3
-========================= */
+/* SIGUIENTE PARTE */
 
 continueBtn.addEventListener(
     "click",
-    ()=>{
+    function(){
 
         messageSection.classList.remove("show");
 
-        setTimeout(
-            ()=>{
+        messageSection.style.display = "none";
 
-                messageSection.style.display="none";
+        finalSection.style.display = "block";
 
-                finalSection.style.display="block";
-
-                finalSection.classList.add("show");
-
-            },
-            150
-        );
+        finalSection.classList.add("show");
 
         burstPetals(70);
 
@@ -974,23 +882,23 @@ continueBtn.addEventListener(
 );
 
 
-/* =========================
-   VOLVER A EMPEZAR
-========================= */
+/* VOLVER AL INICIO */
 
 restartBtn.addEventListener(
     "click",
-    ()=>{
+    function(){
 
         finalSection.classList.remove("show");
 
-        finalSection.style.display="none";
+        finalSection.style.display = "none";
 
         messageSection.classList.remove("show");
 
-        messageSection.style.display="none";
+        messageSection.style.display = "none";
 
-        showIntro();
+        introCard.style.display = "block";
+
+        introCard.classList.add("show");
 
         burstPetals(45);
 
@@ -998,40 +906,38 @@ restartBtn.addEventListener(
 );
 
 
-/* =========================
-   BRILLO AL TOCAR
-========================= */
+/* BRILLO AL TOCAR */
 
 scene.addEventListener(
     "click",
-    (e)=>{
+    function(event){
 
-        if(e.target.closest("button")){
+        if(event.target.closest("button")){
             return;
         }
 
-        const s =
+        const spark =
             document.createElement("span");
 
-        s.className="spark";
+        spark.className = "spark";
 
-        s.style.left =
-            e.clientX+"px";
+        spark.style.left =
+            event.clientX + "px";
 
-        s.style.top =
-            e.clientY+"px";
+        spark.style.top =
+            event.clientY + "px";
 
-        scene.appendChild(s);
+        scene.appendChild(spark);
 
         setTimeout(
-            ()=>s.remove(),
+            function(){
+                spark.remove();
+            },
             3500
         );
 
     }
 );
 
-</script>
-
-</body>
+</script></body>
 </html>
