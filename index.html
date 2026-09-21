@@ -20,57 +20,63 @@ html,body{
 }
 
 body{
-    font-family:Georgia, "Times New Roman", serif;
+    font-family:Georgia,"Times New Roman",serif;
     background:
-        radial-gradient(circle at 50% 100%, #25100f 0%, #0b080d 45%, #030307 100%);
-    color:#fff;
+        radial-gradient(circle at 50% 100%,#28100f 0%,#0b080d 45%,#030307 100%);
+    color:white;
 }
 
-/* CIELO */
+/* ESCENA */
 .scene{
     position:fixed;
     inset:0;
     overflow:hidden;
 }
 
+/* ESTRELLAS */
 .stars{
     position:absolute;
     inset:0;
     pointer-events:none;
+    z-index:1;
 }
 
 .star{
     position:absolute;
     width:2px;
     height:2px;
-    background:#fff;
+    background:white;
     border-radius:50%;
     opacity:.7;
     animation:twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
-    from{opacity:.2;transform:scale(.7)}
-    to{opacity:1;transform:scale(1.5)}
+    from{
+        opacity:.15;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
 }
 
 /* FLORES */
 .flowers{
     position:absolute;
     inset:0;
+    z-index:3;
     pointer-events:none;
-    z-index:2;
 }
 
 .flower{
     position:absolute;
     width:135px;
-    height:190px;
-    transform-origin:bottom center;
+    height:195px;
     opacity:0;
-    animation:
-        flowerAppear 1.5s ease forwards,
-        flowerSway 4s ease-in-out infinite;
+    transform-origin:bottom center;
+    animation:flowerAppear 1.5s ease forwards;
 }
 
 .flower .stem{
@@ -78,28 +84,28 @@ body{
     left:50%;
     bottom:0;
     width:6px;
-    height:125px;
+    height:130px;
     transform:translateX(-50%);
-    background:linear-gradient(to right,#163b19,#3d7a32,#183c1c);
+    background:linear-gradient(to right,#153918,#4c893c,#173b19);
     border-radius:10px;
 }
 
 .flower .leaf{
     position:absolute;
-    width:48px;
-    height:23px;
-    background:linear-gradient(135deg,#214d20,#579548);
+    width:50px;
+    height:24px;
+    background:linear-gradient(135deg,#214c20,#609b4e);
     border-radius:100% 0 100% 0;
 }
 
 .flower .leaf.left{
-    left:24px;
+    left:20px;
     bottom:55px;
     transform:rotate(-28deg);
 }
 
 .flower .leaf.right{
-    right:22px;
+    right:20px;
     bottom:82px;
     transform:scaleX(-1) rotate(-28deg);
 }
@@ -108,8 +114,8 @@ body{
     position:absolute;
     left:50%;
     top:0;
-    width:105px;
-    height:105px;
+    width:108px;
+    height:108px;
     transform:translateX(-50%);
 }
 
@@ -117,13 +123,13 @@ body{
     position:absolute;
     left:50%;
     top:50%;
-    width:48px;
-    height:72px;
-    margin-left:-24px;
-    margin-top:-55px;
+    width:49px;
+    height:73px;
+    margin-left:-24.5px;
+    margin-top:-56px;
     border-radius:55% 55% 48% 48%;
     transform-origin:50% 100%;
-    background:linear-gradient(to bottom,#ff4e62,#d90f38 70%,#a8072b);
+    background:linear-gradient(to bottom,#ff5267,#d80f38 70%,#9f072a);
     box-shadow:
         inset 0 4px 8px rgba(255,255,255,.25),
         0 0 12px rgba(255,50,80,.25);
@@ -142,20 +148,37 @@ body{
     position:absolute;
     left:50%;
     top:50%;
-    width:35px;
-    height:35px;
+    width:36px;
+    height:36px;
     transform:translate(-50%,-50%);
     border-radius:50%;
-    background:radial-gradient(circle,#ffd66b 0%,#f3a62e 55%,#9d4e14 100%);
-    box-shadow:0 0 15px rgba(255,183,60,.7);
+    background:radial-gradient(circle,#ffe078 0%,#f3a62e 55%,#9d4e14 100%);
+    box-shadow:0 0 16px rgba(255,183,60,.7);
+}
+
+@keyframes flowerAppear{
+    0%{
+        opacity:0;
+        transform:translateY(90px) scale(.35);
+    }
+
+    60%{
+        opacity:1;
+        transform:translateY(-8px) scale(1.08);
+    }
+
+    100%{
+        opacity:1;
+        transform:translateY(0) scale(var(--scale));
+    }
 }
 
 /* PÉTALOS QUE CAEN */
 .falling{
     position:absolute;
     inset:0;
-    pointer-events:none;
     z-index:4;
+    pointer-events:none;
 }
 
 .fallingPetal{
@@ -165,7 +188,7 @@ body{
     height:21px;
     border-radius:70% 30% 70% 30%;
     background:linear-gradient(135deg,#ff7180,#c90b38);
-    opacity:.8;
+    opacity:0;
     animation:fall linear infinite;
 }
 
@@ -174,14 +197,21 @@ body{
         transform:translateY(-50px) rotate(0deg);
         opacity:0;
     }
-    10%{opacity:.8}
+
+    15%{
+        opacity:.8;
+    }
+
     100%{
         transform:translateY(110vh) rotate(500deg);
         opacity:0;
     }
 }
 
-/* TARJETA */
+/* TARJETA
+   IMPORTANTE:
+   empieza completamente invisible
+*/
 .card{
     position:absolute;
     z-index:10;
@@ -193,21 +223,31 @@ body{
     overflow:auto;
     padding:42px 30px;
     text-align:center;
+
     border:1px solid rgba(255,190,120,.25);
     border-radius:28px;
-    background:rgba(12,8,13,.88);
+
+    background:rgba(12,8,13,.90);
     backdrop-filter:blur(12px);
+
     box-shadow:
         0 0 45px rgba(255,80,90,.12),
         0 20px 60px rgba(0,0,0,.6);
+
     opacity:0;
     visibility:hidden;
-    transition:opacity 1.5s ease, visibility 1.5s ease;
+    pointer-events:none;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
 }
 
+/* SOLO DESPUÉS DE LAS FLORES */
 .card.show{
     opacity:1;
     visibility:visible;
+    pointer-events:auto;
 }
 
 .section{
@@ -224,12 +264,14 @@ body{
         opacity:0;
         transform:translateY(18px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
+/* TEXTOS */
 .small{
     color:#e7b87b;
     font-size:14px;
@@ -271,37 +313,26 @@ p{
 }
 
 @keyframes heartbeat{
-    0%,100%{transform:scale(1)}
-    15%{transform:scale(1.12)}
-    30%{transform:scale(1)}
-    45%{transform:scale(1.08)}
+    0%,100%{
+        transform:scale(1);
+    }
+
+    15%{
+        transform:scale(1.12);
+    }
+
+    30%{
+        transform:scale(1);
+    }
+
+    45%{
+        transform:scale(1.08);
+    }
 }
 
 .highlight{
     color:#f6bd86;
     font-weight:bold;
-}
-
-button{
-    border:1px solid rgba(255,192,125,.45);
-    background:linear-gradient(135deg,#7d1930,#b52b43);
-    color:#fff;
-    padding:14px 27px;
-    border-radius:999px;
-    font-size:16px;
-    font-family:Arial,Helvetica,sans-serif;
-    cursor:pointer;
-    box-shadow:0 8px 25px rgba(130,20,45,.3);
-    transition:.25s ease;
-}
-
-button:hover{
-    transform:translateY(-2px) scale(1.02);
-    box-shadow:0 12px 30px rgba(180,35,60,.4);
-}
-
-button:active{
-    transform:scale(.97);
 }
 
 .finalText{
@@ -314,6 +345,33 @@ button:active{
     margin-top:25px;
     color:#e5b176;
     font-size:18px;
+}
+
+/* BOTONES */
+button{
+    border:1px solid rgba(255,192,125,.45);
+    background:linear-gradient(135deg,#7d1930,#b52b43);
+    color:white;
+
+    padding:14px 27px;
+    border-radius:999px;
+
+    font-size:16px;
+    font-family:Arial,Helvetica,sans-serif;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 25px rgba(130,20,45,.3);
+    transition:.25s ease;
+}
+
+button:hover{
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 12px 30px rgba(180,35,60,.4);
+}
+
+button:active{
+    transform:scale(.97);
 }
 
 /* DESTELLOS */
@@ -333,39 +391,16 @@ button:active{
         opacity:1;
         transform:scale(1);
     }
+
     to{
         opacity:0;
         transform:scale(5);
     }
 }
 
-/* ANIMACIONES DE FLORES */
-@keyframes flowerAppear{
-    0%{
-        opacity:0;
-        transform:translateY(70px) scale(.45);
-    }
-    60%{
-        opacity:1;
-        transform:translateY(-8px) scale(1.05);
-    }
-    100%{
-        opacity:1;
-        transform:translateY(0) scale(var(--scale));
-    }
-}
-
-@keyframes flowerSway{
-    0%,100%{
-        margin-left:0;
-    }
-    50%{
-        margin-left:7px;
-    }
-}
-
 /* MÓVIL */
 @media(max-width:600px){
+
     .card{
         width:92%;
         padding:32px 20px;
@@ -417,12 +452,15 @@ button:active{
 
     <div class="falling" id="falling"></div>
 
+    <!-- LA TARJETA EMPIEZA OCULTA -->
     <div class="card" id="card">
 
         <!-- PARTE 1 -->
         <div class="section show" id="section1">
 
-            <div class="small">Un detalle hecho especialmente para ti</div>
+            <div class="small">
+                Un detalle hecho especialmente para ti
+            </div>
 
             <h1>
                 Para mi princesa preciosa<br>
@@ -435,18 +473,27 @@ button:active{
                 todo lo que siento por ti.
             </p>
 
-            <button id="openBtn">Abrir mi regalo</button>
+            <button id="openBtn">
+                Abrir mi regalo
+            </button>
 
         </div>
+
 
         <!-- PARTE 2 -->
         <div class="section" id="section2">
 
-            <div class="small">Para ti</div>
+            <div class="small">
+                Para ti
+            </div>
 
-            <div class="heart">♥</div>
+            <div class="heart">
+                ♥
+            </div>
 
-            <h2>María</h2>
+            <h2>
+                María
+            </h2>
 
             <p>
                 Quería que tuvieras un detalle diferente, algo que no fuera
@@ -460,21 +507,30 @@ button:active{
             </p>
 
             <p>
-                <span class="highlight">Te mereces cosas bonitas</span>,
+                <span class="highlight">
+                    Te mereces cosas bonitas
+                </span>,
                 momentos que te hagan sonreír y personas que sepan valorar
                 la hermosa persona que eres.
             </p>
 
-            <button id="nextBtn">Hay algo más</button>
+            <button id="nextBtn">
+                Hay algo más
+            </button>
 
         </div>
+
 
         <!-- PARTE 3 -->
         <div class="section" id="section3">
 
-            <div class="small">Un último detalle</div>
+            <div class="small">
+                Un último detalle
+            </div>
 
-            <div class="heart">🌹</div>
+            <div class="heart">
+                🌹
+            </div>
 
             <p class="finalText">
                 Puede que estas flores sean digitales...
@@ -495,19 +551,29 @@ button:active{
 
             <br>
 
-            <button id="restartBtn">Volver al inicio</button>
+            <button id="restartBtn">
+                Volver al inicio
+            </button>
 
         </div>
 
     </div>
+
 </div>
 
+
 <script>
-/* ESTRELLAS */
+
+/* =========================
+   ESTRELLAS
+========================= */
+
 const stars = document.getElementById("stars");
 
 for(let i = 0; i < 90; i++){
+
     const star = document.createElement("div");
+
     star.className = "star";
 
     star.style.left = Math.random() * 100 + "%";
@@ -517,25 +583,32 @@ for(let i = 0; i < 90; i++){
     stars.appendChild(star);
 }
 
-/* FLORES */
+
+/* =========================
+   FLORES
+========================= */
+
 const flowers = document.getElementById("flowers");
 
 function random(min,max){
-    return Math.random() * (max-min) + min;
+    return Math.random() * (max - min) + min;
 }
 
 function makeFlower(x,y,scale,delay){
 
     const flower = document.createElement("div");
+
     flower.className = "flower";
 
     flower.style.left = x + "%";
     flower.style.top = y + "px";
     flower.style.setProperty("--scale",scale);
+
     flower.style.animationDelay = delay + "s";
 
     flower.innerHTML = `
         <div class="head">
+
             <div class="petal"></div>
             <div class="petal"></div>
             <div class="petal"></div>
@@ -544,10 +617,13 @@ function makeFlower(x,y,scale,delay){
             <div class="petal"></div>
             <div class="petal"></div>
             <div class="petal"></div>
+
             <div class="center"></div>
+
         </div>
 
         <div class="stem"></div>
+
         <div class="leaf left"></div>
         <div class="leaf right"></div>
     `;
@@ -555,9 +631,10 @@ function makeFlower(x,y,scale,delay){
     flowers.appendChild(flower);
 }
 
+
 /*
-    PRIMERO APARECEN LAS FLORES.
-    Están colocadas altas para que se vean completas.
+   AQUÍ SE CREAN LAS FLORES.
+   TODAS APARECEN ANTES DE MOSTRAR EL TEXTO.
 */
 
 for(let i = 0; i < 24; i++){
@@ -566,12 +643,16 @@ for(let i = 0; i < 24; i++){
         random(-5,93),
         random(45,125),
         random(.85,1.35),
-        random(0,3.5)
+        random(0,3.2)
     );
 
 }
 
-/* PÉTALOS */
+
+/* =========================
+   PÉTALOS
+========================= */
+
 const falling = document.getElementById("falling");
 
 for(let i = 0; i < 28; i++){
@@ -581,62 +662,108 @@ for(let i = 0; i < 28; i++){
     petal.className = "fallingPetal";
 
     petal.style.left = random(0,100) + "%";
-    petal.style.animationDuration = random(5,11) + "s";
-    petal.style.animationDelay = random(2,9) + "s";
-    petal.style.transform = "rotate(" + random(0,360) + "deg)";
+
+    petal.style.animationDuration =
+        random(5,11) + "s";
+
+    petal.style.animationDelay =
+        random(5,12) + "s";
 
     falling.appendChild(petal);
 }
 
-/* MOSTRAR TARJETA DESPUÉS DE LAS FLORES */
+
+/* =========================
+   MOSTRAR TARJETA
+=========================
+
+   Las flores tardan máximo unos 4.7 segundos
+   en terminar de aparecer.
+
+   Esperamos 5.5 segundos.
+   Así NO aparece ningún texto
+   mientras las flores están entrando.
+*/
 
 const card = document.getElementById("card");
 
 setTimeout(() => {
+
     card.classList.add("show");
-}, 4300);
+
+},5500);
 
 
-/* CAMBIAR SECCIONES */
+/* =========================
+   SECCIONES
+========================= */
 
-const section1 = document.getElementById("section1");
-const section2 = document.getElementById("section2");
-const section3 = document.getElementById("section3");
+const section1 =
+    document.getElementById("section1");
 
-document.getElementById("openBtn").addEventListener("click", () => {
+const section2 =
+    document.getElementById("section2");
 
-    section1.classList.remove("show");
-
-    setTimeout(() => {
-        section2.classList.add("show");
-    },100);
-
-});
-
-document.getElementById("nextBtn").addEventListener("click", () => {
-
-    section2.classList.remove("show");
-
-    setTimeout(() => {
-        section3.classList.add("show");
-    },100);
-
-});
-
-document.getElementById("restartBtn").addEventListener("click", () => {
-
-    section3.classList.remove("show");
-
-    setTimeout(() => {
-        section1.classList.add("show");
-    },100);
-
-});
+const section3 =
+    document.getElementById("section3");
 
 
-/* DESTELLOS AL TOCAR */
+/* ABRIR REGALO */
 
-document.addEventListener("click", function(e){
+document
+    .getElementById("openBtn")
+    .addEventListener("click",() => {
+
+        section1.classList.remove("show");
+
+        setTimeout(() => {
+
+            section2.classList.add("show");
+
+        },100);
+
+    });
+
+
+/* SIGUIENTE */
+
+document
+    .getElementById("nextBtn")
+    .addEventListener("click",() => {
+
+        section2.classList.remove("show");
+
+        setTimeout(() => {
+
+            section3.classList.add("show");
+
+        },100);
+
+    });
+
+
+/* VOLVER AL INICIO */
+
+document
+    .getElementById("restartBtn")
+    .addEventListener("click",() => {
+
+        section3.classList.remove("show");
+
+        setTimeout(() => {
+
+            section1.classList.add("show");
+
+        },100);
+
+    });
+
+
+/* =========================
+   DESTELLOS AL TOCAR
+========================= */
+
+document.addEventListener("click",(e) => {
 
     const spark = document.createElement("div");
 
@@ -648,10 +775,13 @@ document.addEventListener("click", function(e){
     document.body.appendChild(spark);
 
     setTimeout(() => {
+
         spark.remove();
+
     },800);
 
 });
+
 </script>
 
 </body>
