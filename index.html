@@ -22,11 +22,10 @@ html,body{
 body{
     font-family:Georgia,"Times New Roman",serif;
     background:
-        radial-gradient(circle at 50% 100%,#28100f 0%,#0b080d 45%,#030307 100%);
+        radial-gradient(circle at 50% 100%,#2b1b08 0%,#0b080d 45%,#030307 100%);
     color:white;
 }
 
-/* ESCENA */
 .scene{
     position:fixed;
     inset:0;
@@ -34,6 +33,7 @@ body{
 }
 
 /* ESTRELLAS */
+
 .stars{
     position:absolute;
     inset:0;
@@ -62,7 +62,8 @@ body{
     }
 }
 
-/* FLORES */
+/* FLORES AMARILLAS */
+
 .flowers{
     position:absolute;
     inset:0;
@@ -86,7 +87,12 @@ body{
     width:6px;
     height:130px;
     transform:translateX(-50%);
-    background:linear-gradient(to right,#153918,#4c893c,#173b19);
+    background:linear-gradient(
+        to right,
+        #173d18,
+        #4f8d38,
+        #173d18
+    );
     border-radius:10px;
 }
 
@@ -94,7 +100,11 @@ body{
     position:absolute;
     width:50px;
     height:24px;
-    background:linear-gradient(135deg,#214c20,#609b4e);
+    background:linear-gradient(
+        135deg,
+        #214c20,
+        #68a84d
+    );
     border-radius:100% 0 100% 0;
 }
 
@@ -129,20 +139,51 @@ body{
     margin-top:-56px;
     border-radius:55% 55% 48% 48%;
     transform-origin:50% 100%;
-    background:linear-gradient(to bottom,#ff5267,#d80f38 70%,#9f072a);
+
+    /* AMARILLO */
+    background:linear-gradient(
+        to bottom,
+        #fff45c 0%,
+        #ffd92f 55%,
+        #e9a900 100%
+    );
+
     box-shadow:
-        inset 0 4px 8px rgba(255,255,255,.25),
-        0 0 12px rgba(255,50,80,.25);
+        inset 0 4px 8px rgba(255,255,255,.35),
+        0 0 15px rgba(255,205,40,.35);
 }
 
-.petal:nth-child(1){transform:rotate(0deg) translateY(-18px)}
-.petal:nth-child(2){transform:rotate(45deg) translateY(-18px)}
-.petal:nth-child(3){transform:rotate(90deg) translateY(-18px)}
-.petal:nth-child(4){transform:rotate(135deg) translateY(-18px)}
-.petal:nth-child(5){transform:rotate(180deg) translateY(-18px)}
-.petal:nth-child(6){transform:rotate(225deg) translateY(-18px)}
-.petal:nth-child(7){transform:rotate(270deg) translateY(-18px)}
-.petal:nth-child(8){transform:rotate(315deg) translateY(-18px)}
+.petal:nth-child(1){
+    transform:rotate(0deg) translateY(-18px);
+}
+
+.petal:nth-child(2){
+    transform:rotate(45deg) translateY(-18px);
+}
+
+.petal:nth-child(3){
+    transform:rotate(90deg) translateY(-18px);
+}
+
+.petal:nth-child(4){
+    transform:rotate(135deg) translateY(-18px);
+}
+
+.petal:nth-child(5){
+    transform:rotate(180deg) translateY(-18px);
+}
+
+.petal:nth-child(6){
+    transform:rotate(225deg) translateY(-18px);
+}
+
+.petal:nth-child(7){
+    transform:rotate(270deg) translateY(-18px);
+}
+
+.petal:nth-child(8){
+    transform:rotate(315deg) translateY(-18px);
+}
 
 .center{
     position:absolute;
@@ -152,28 +193,46 @@ body{
     height:36px;
     transform:translate(-50%,-50%);
     border-radius:50%;
-    background:radial-gradient(circle,#ffe078 0%,#f3a62e 55%,#9d4e14 100%);
-    box-shadow:0 0 16px rgba(255,183,60,.7);
+
+    background:radial-gradient(
+        circle,
+        #8a5200 0%,
+        #5d3300 55%,
+        #2d1800 100%
+    );
+
+    box-shadow:
+        0 0 12px rgba(255,196,40,.55);
 }
 
+/* APARICIÓN DE LAS FLORES */
+
 @keyframes flowerAppear{
+
     0%{
         opacity:0;
-        transform:translateY(90px) scale(.35);
+        transform:
+            translateY(90px)
+            scale(.35);
     }
 
     60%{
         opacity:1;
-        transform:translateY(-8px) scale(1.08);
+        transform:
+            translateY(-8px)
+            scale(1.08);
     }
 
     100%{
         opacity:1;
-        transform:translateY(0) scale(var(--scale));
+        transform:
+            translateY(0)
+            scale(var(--scale));
     }
 }
 
 /* PÉTALOS QUE CAEN */
+
 .falling{
     position:absolute;
     inset:0;
@@ -187,14 +246,25 @@ body{
     width:13px;
     height:21px;
     border-radius:70% 30% 70% 30%;
-    background:linear-gradient(135deg,#ff7180,#c90b38);
+
+    background:linear-gradient(
+        135deg,
+        #fff15a,
+        #f2bd19
+    );
+
     opacity:0;
-    animation:fall linear infinite;
+
+    animation:
+        fall linear infinite;
 }
 
 @keyframes fall{
+
     0%{
-        transform:translateY(-50px) rotate(0deg);
+        transform:
+            translateY(-50px)
+            rotate(0deg);
         opacity:0;
     }
 
@@ -203,36 +273,47 @@ body{
     }
 
     100%{
-        transform:translateY(110vh) rotate(500deg);
+        transform:
+            translateY(110vh)
+            rotate(500deg);
         opacity:0;
     }
 }
 
-/* TARJETA
-   IMPORTANTE:
-   empieza completamente invisible
-*/
+/* TARJETA */
+
 .card{
     position:absolute;
     z-index:10;
+
     left:50%;
     top:50%;
+
     transform:translate(-50%,-50%);
+
     width:min(90%,620px);
     max-height:90vh;
     overflow:auto;
+
     padding:42px 30px;
+
     text-align:center;
 
-    border:1px solid rgba(255,190,120,.25);
+    border:1px solid rgba(255,210,80,.25);
     border-radius:28px;
 
-    background:rgba(12,8,13,.90);
+    background:rgba(12,9,5,.90);
+
     backdrop-filter:blur(12px);
 
     box-shadow:
-        0 0 45px rgba(255,80,90,.12),
+        0 0 45px rgba(255,190,40,.10),
         0 20px 60px rgba(0,0,0,.6);
+
+    /*
+       LA TARJETA EMPIEZA INVISIBLE
+       Y NO SE PUEDE TOCAR.
+    */
 
     opacity:0;
     visibility:hidden;
@@ -243,12 +324,18 @@ body{
         visibility 1.5s ease;
 }
 
-/* SOLO DESPUÉS DE LAS FLORES */
+/*
+   SOLO DESPUÉS DE LAS FLORES
+   SE ACTIVA .show
+*/
+
 .card.show{
     opacity:1;
     visibility:visible;
     pointer-events:auto;
 }
+
+/* SECCIONES */
 
 .section{
     display:none;
@@ -260,6 +347,7 @@ body{
 }
 
 @keyframes sectionIn{
+
     from{
         opacity:0;
         transform:translateY(18px);
@@ -272,8 +360,9 @@ body{
 }
 
 /* TEXTOS */
+
 .small{
-    color:#e7b87b;
+    color:#f1c94b;
     font-size:14px;
     letter-spacing:2px;
     margin-bottom:18px;
@@ -283,14 +372,18 @@ body{
 h1{
     font-size:clamp(30px,7vw,54px);
     line-height:1.15;
-    color:#fff3df;
-    text-shadow:0 0 20px rgba(255,180,100,.2);
+
+    color:#fff7d8;
+
+    text-shadow:
+        0 0 20px rgba(255,205,80,.20);
+
     margin-bottom:20px;
 }
 
 h2{
     font-size:clamp(27px,6vw,44px);
-    color:#ffe9d2;
+    color:#fff1bd;
     margin-bottom:18px;
 }
 
@@ -298,21 +391,24 @@ p{
     font-family:Arial,Helvetica,sans-serif;
     font-size:17px;
     line-height:1.75;
-    color:#eee4df;
+    color:#eee7d8;
     margin-bottom:18px;
 }
 
 .intro{
-    color:#d8cdc8;
+    color:#d8d0c0;
 }
 
 .heart{
     font-size:45px;
     margin:10px 0 20px;
-    animation:heartbeat 1.8s ease-in-out infinite;
+
+    animation:
+        heartbeat 1.8s ease-in-out infinite;
 }
 
 @keyframes heartbeat{
+
     0%,100%{
         transform:scale(1);
     }
@@ -331,29 +427,38 @@ p{
 }
 
 .highlight{
-    color:#f6bd86;
+    color:#ffd54a;
     font-weight:bold;
 }
 
 .finalText{
     font-size:21px;
-    color:#ffe9d7;
+    color:#fff0bd;
     line-height:1.7;
 }
 
 .signature{
     margin-top:25px;
-    color:#e5b176;
+    color:#e9c75c;
     font-size:18px;
 }
 
 /* BOTONES */
+
 button{
-    border:1px solid rgba(255,192,125,.45);
-    background:linear-gradient(135deg,#7d1930,#b52b43);
+    border:1px solid rgba(255,220,100,.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            #9b6710,
+            #d39b19
+        );
+
     color:white;
 
     padding:14px 27px;
+
     border-radius:999px;
 
     font-size:16px;
@@ -361,13 +466,19 @@ button{
 
     cursor:pointer;
 
-    box-shadow:0 8px 25px rgba(130,20,45,.3);
+    box-shadow:
+        0 8px 25px rgba(170,115,10,.3);
+
     transition:.25s ease;
 }
 
 button:hover{
-    transform:translateY(-2px) scale(1.02);
-    box-shadow:0 12px 30px rgba(180,35,60,.4);
+    transform:
+        translateY(-2px)
+        scale(1.02);
+
+    box-shadow:
+        0 12px 30px rgba(210,155,20,.4);
 }
 
 button:active{
@@ -375,18 +486,27 @@ button:active{
 }
 
 /* DESTELLOS */
+
 .spark{
     position:absolute;
+
     width:5px;
     height:5px;
+
     border-radius:50%;
-    background:#ffd58d;
+
+    background:#ffe46b;
+
     pointer-events:none;
+
     z-index:20;
-    animation:spark .8s ease-out forwards;
+
+    animation:
+        spark .8s ease-out forwards;
 }
 
 @keyframes spark{
+
     from{
         opacity:1;
         transform:scale(1);
@@ -399,6 +519,7 @@ button:active{
 }
 
 /* MÓVIL */
+
 @media(max-width:600px){
 
     .card{
@@ -448,14 +569,17 @@ button:active{
 
     <div class="stars" id="stars"></div>
 
+    <!-- FLORES -->
     <div class="flowers" id="flowers"></div>
 
+    <!-- PÉTALOS -->
     <div class="falling" id="falling"></div>
 
-    <!-- LA TARJETA EMPIEZA OCULTA -->
+    <!-- TARJETA -->
     <div class="card" id="card">
 
         <!-- PARTE 1 -->
+
         <div class="section show" id="section1">
 
             <div class="small">
@@ -481,6 +605,7 @@ button:active{
 
 
         <!-- PARTE 2 -->
+
         <div class="section" id="section2">
 
             <div class="small">
@@ -522,6 +647,7 @@ button:active{
 
 
         <!-- PARTE 3 -->
+
         <div class="section" id="section3">
 
             <div class="small">
@@ -529,7 +655,7 @@ button:active{
             </div>
 
             <div class="heart">
-                🌹
+                🌼
             </div>
 
             <p class="finalText">
@@ -568,17 +694,24 @@ button:active{
    ESTRELLAS
 ========================= */
 
-const stars = document.getElementById("stars");
+const stars =
+    document.getElementById("stars");
 
 for(let i = 0; i < 90; i++){
 
-    const star = document.createElement("div");
+    const star =
+        document.createElement("div");
 
     star.className = "star";
 
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
-    star.style.animationDelay = Math.random() * 3 + "s";
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
 
     stars.appendChild(star);
 }
@@ -588,25 +721,43 @@ for(let i = 0; i < 90; i++){
    FLORES
 ========================= */
 
-const flowers = document.getElementById("flowers");
+const flowers =
+    document.getElementById("flowers");
 
 function random(min,max){
-    return Math.random() * (max - min) + min;
+
+    return Math.random() *
+        (max - min) + min;
 }
 
-function makeFlower(x,y,scale,delay){
+function makeFlower(
+    x,
+    y,
+    scale,
+    delay
+){
 
-    const flower = document.createElement("div");
+    const flower =
+        document.createElement("div");
 
     flower.className = "flower";
 
-    flower.style.left = x + "%";
-    flower.style.top = y + "px";
-    flower.style.setProperty("--scale",scale);
+    flower.style.left =
+        x + "%";
 
-    flower.style.animationDelay = delay + "s";
+    flower.style.top =
+        y + "px";
+
+    flower.style.setProperty(
+        "--scale",
+        scale
+    );
+
+    flower.style.animationDelay =
+        delay + "s";
 
     flower.innerHTML = `
+
         <div class="head">
 
             <div class="petal"></div>
@@ -626,6 +777,7 @@ function makeFlower(x,y,scale,delay){
 
         <div class="leaf left"></div>
         <div class="leaf right"></div>
+
     `;
 
     flowers.appendChild(flower);
@@ -633,8 +785,8 @@ function makeFlower(x,y,scale,delay){
 
 
 /*
-   AQUÍ SE CREAN LAS FLORES.
-   TODAS APARECEN ANTES DE MOSTRAR EL TEXTO.
+   24 FLORES AMARILLAS.
+   TODAS APARECEN ANTES DEL TEXTO.
 */
 
 for(let i = 0; i < 24; i++){
@@ -650,18 +802,22 @@ for(let i = 0; i < 24; i++){
 
 
 /* =========================
-   PÉTALOS
+   PÉTALOS AMARILLOS
 ========================= */
 
-const falling = document.getElementById("falling");
+const falling =
+    document.getElementById("falling");
 
 for(let i = 0; i < 28; i++){
 
-    const petal = document.createElement("div");
+    const petal =
+        document.createElement("div");
 
-    petal.className = "fallingPetal";
+    petal.className =
+        "fallingPetal";
 
-    petal.style.left = random(0,100) + "%";
+    petal.style.left =
+        random(0,100) + "%";
 
     petal.style.animationDuration =
         random(5,11) + "s";
@@ -674,18 +830,15 @@ for(let i = 0; i < 28; i++){
 
 
 /* =========================
-   MOSTRAR TARJETA
+   MOSTRAR TEXTO
 =========================
 
-   Las flores tardan máximo unos 4.7 segundos
-   en terminar de aparecer.
-
-   Esperamos 5.5 segundos.
-   Así NO aparece ningún texto
-   mientras las flores están entrando.
+   Las flores terminan primero.
+   El texto aparece después.
 */
 
-const card = document.getElementById("card");
+const card =
+    document.getElementById("card");
 
 setTimeout(() => {
 
@@ -760,17 +913,22 @@ document
 
 
 /* =========================
-   DESTELLOS AL TOCAR
+   DESTELLOS
 ========================= */
 
 document.addEventListener("click",(e) => {
 
-    const spark = document.createElement("div");
+    const spark =
+        document.createElement("div");
 
-    spark.className = "spark";
+    spark.className =
+        "spark";
 
-    spark.style.left = e.clientX + "px";
-    spark.style.top = e.clientY + "px";
+    spark.style.left =
+        e.clientX + "px";
+
+    spark.style.top =
+        e.clientY + "px";
 
     document.body.appendChild(spark);
 
