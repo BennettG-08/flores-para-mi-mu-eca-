@@ -1,943 +1,658 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080806">
-<title>Para María, mi princesa preciosa</title><style>
+<meta name="theme-color" content="#050509">
+<title>Para María, mi princesa preciosa</title>
 
+<style>
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html,
-body{
-    margin:0;
+html,body{
     width:100%;
-    min-height:100%;
-    font-family:Georgia,"Times New Roman",serif;
-    background:#080806;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(circle at 50% 100%, #25100f 0%, #0b080d 45%, #030307 100%);
     color:#fff;
 }
 
-body{
-    overflow:hidden;
-}
-
+/* CIELO */
 .scene{
-    position:relative;
-    width:100%;
-    min-height:100vh;
+    position:fixed;
+    inset:0;
     overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-
-    background:
-        radial-gradient(
-            circle at 50% 65%,
-            rgba(255,190,35,.18),
-            transparent 32%
-        ),
-        linear-gradient(
-            180deg,
-            #08090d 0%,
-            #17100b 55%,
-            #090806 100%
-        );
 }
 
-
-/* FONDOS */
-
-.stars,
-.petals,
-.flowers{
+.stars{
     position:absolute;
     inset:0;
     pointer-events:none;
-    overflow:hidden;
 }
 
 .star{
     position:absolute;
-    width:3px;
-    height:3px;
-    border-radius:50%;
+    width:2px;
+    height:2px;
     background:#fff;
+    border-radius:50%;
     opacity:.7;
-    animation:twinkle 2.5s infinite ease-in-out;
+    animation:twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
-
-    50%{
-        opacity:.15;
-        transform:scale(.6);
-    }
-
+    from{opacity:.2;transform:scale(.7)}
+    to{opacity:1;transform:scale(1.5)}
 }
 
+/* FLORES */
+.flowers{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+}
 
-/* TARJETAS */
+.flower{
+    position:absolute;
+    width:135px;
+    height:190px;
+    transform-origin:bottom center;
+    opacity:0;
+    animation:
+        flowerAppear 1.5s ease forwards,
+        flowerSway 4s ease-in-out infinite;
+}
 
-.card,
-.section{
-    position:relative;
-    z-index:10;
-    width:min(650px,100%);
-    text-align:center;
-    padding:42px 25px 36px;
+.flower .stem{
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:6px;
+    height:125px;
+    transform:translateX(-50%);
+    background:linear-gradient(to right,#163b19,#3d7a32,#183c1c);
+    border-radius:10px;
+}
 
-    border:1px solid rgba(255,205,70,.35);
-    border-radius:28px;
+.flower .leaf{
+    position:absolute;
+    width:48px;
+    height:23px;
+    background:linear-gradient(135deg,#214d20,#579548);
+    border-radius:100% 0 100% 0;
+}
 
-    background:rgba(8,8,6,.72);
+.flower .leaf.left{
+    left:24px;
+    bottom:55px;
+    transform:rotate(-28deg);
+}
 
+.flower .leaf.right{
+    right:22px;
+    bottom:82px;
+    transform:scaleX(-1) rotate(-28deg);
+}
+
+.flower .head{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:105px;
+    height:105px;
+    transform:translateX(-50%);
+}
+
+.petal{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:48px;
+    height:72px;
+    margin-left:-24px;
+    margin-top:-55px;
+    border-radius:55% 55% 48% 48%;
+    transform-origin:50% 100%;
+    background:linear-gradient(to bottom,#ff4e62,#d90f38 70%,#a8072b);
     box-shadow:
-        0 20px 80px rgba(0,0,0,.55);
-
-    backdrop-filter:blur(8px);
+        inset 0 4px 8px rgba(255,255,255,.25),
+        0 0 12px rgba(255,50,80,.25);
 }
 
+.petal:nth-child(1){transform:rotate(0deg) translateY(-18px)}
+.petal:nth-child(2){transform:rotate(45deg) translateY(-18px)}
+.petal:nth-child(3){transform:rotate(90deg) translateY(-18px)}
+.petal:nth-child(4){transform:rotate(135deg) translateY(-18px)}
+.petal:nth-child(5){transform:rotate(180deg) translateY(-18px)}
+.petal:nth-child(6){transform:rotate(225deg) translateY(-18px)}
+.petal:nth-child(7){transform:rotate(270deg) translateY(-18px)}
+.petal:nth-child(8){transform:rotate(315deg) translateY(-18px)}
+
+.center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:35px;
+    height:35px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:radial-gradient(circle,#ffd66b 0%,#f3a62e 55%,#9d4e14 100%);
+    box-shadow:0 0 15px rgba(255,183,60,.7);
+}
+
+/* PÉTALOS QUE CAEN */
+.falling{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:4;
+}
+
+.fallingPetal{
+    position:absolute;
+    top:-40px;
+    width:13px;
+    height:21px;
+    border-radius:70% 30% 70% 30%;
+    background:linear-gradient(135deg,#ff7180,#c90b38);
+    opacity:.8;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    0%{
+        transform:translateY(-50px) rotate(0deg);
+        opacity:0;
+    }
+    10%{opacity:.8}
+    100%{
+        transform:translateY(110vh) rotate(500deg);
+        opacity:0;
+    }
+}
+
+/* TARJETA */
 .card{
-    display:block;
-    animation:appear .9s ease;
+    position:absolute;
+    z-index:10;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:min(90%,620px);
+    max-height:90vh;
+    overflow:auto;
+    padding:42px 30px;
+    text-align:center;
+    border:1px solid rgba(255,190,120,.25);
+    border-radius:28px;
+    background:rgba(12,8,13,.88);
+    backdrop-filter:blur(12px);
+    box-shadow:
+        0 0 45px rgba(255,80,90,.12),
+        0 20px 60px rgba(0,0,0,.6);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 1.5s ease, visibility 1.5s ease;
+}
+
+.card.show{
+    opacity:1;
+    visibility:visible;
 }
 
 .section{
     display:none;
+    animation:sectionIn 1s ease forwards;
 }
 
 .section.show{
     display:block;
-    animation:appear .8s ease;
 }
 
-@keyframes appear{
-
+@keyframes sectionIn{
     from{
         opacity:0;
         transform:translateY(18px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
-
 }
 
-
-/* TEXTO */
-
 .small{
-    letter-spacing:4px;
+    color:#e7b87b;
+    font-size:14px;
+    letter-spacing:2px;
+    margin-bottom:18px;
     text-transform:uppercase;
-    font:12px Arial,sans-serif;
-    color:#e7c45a;
 }
 
 h1{
-    font-size:clamp(42px,11vw,76px);
-    line-height:.95;
-    margin:18px 0 20px;
-    color:#ffd84d;
-    font-style:italic;
+    font-size:clamp(30px,7vw,54px);
+    line-height:1.15;
+    color:#fff3df;
+    text-shadow:0 0 20px rgba(255,180,100,.2);
+    margin-bottom:20px;
 }
 
 h2{
-    color:#ffd84d;
-    font-size:clamp(26px,7vw,40px);
-    line-height:1.15;
+    font-size:clamp(27px,6vw,44px);
+    color:#ffe9d2;
+    margin-bottom:18px;
+}
+
+p{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:17px;
+    line-height:1.75;
+    color:#eee4df;
+    margin-bottom:18px;
 }
 
 .intro{
-    max-width:510px;
-    margin:auto;
-    font-size:19px;
-    line-height:1.7;
-    color:#f5eee0;
-}
-
-.section p{
-    font-size:20px;
-    line-height:1.7;
-    margin:15px 0;
-}
-
-.quote{
-    font-style:italic;
-    color:#ffd84d;
-    font-size:24px!important;
+    color:#d8cdc8;
 }
 
 .heart{
-    font-size:42px;
-    display:block;
-    margin:8px 0;
-    animation:beat 1.3s infinite;
+    font-size:45px;
+    margin:10px 0 20px;
+    animation:heartbeat 1.8s ease-in-out infinite;
 }
 
-@keyframes beat{
+@keyframes heartbeat{
+    0%,100%{transform:scale(1)}
+    15%{transform:scale(1.12)}
+    30%{transform:scale(1)}
+    45%{transform:scale(1.08)}
+}
 
-    50%{
-        transform:scale(1.18);
-    }
+.highlight{
+    color:#f6bd86;
+    font-weight:bold;
+}
 
+button{
+    border:1px solid rgba(255,192,125,.45);
+    background:linear-gradient(135deg,#7d1930,#b52b43);
+    color:#fff;
+    padding:14px 27px;
+    border-radius:999px;
+    font-size:16px;
+    font-family:Arial,Helvetica,sans-serif;
+    cursor:pointer;
+    box-shadow:0 8px 25px rgba(130,20,45,.3);
+    transition:.25s ease;
+}
+
+button:hover{
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 12px 30px rgba(180,35,60,.4);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+.finalText{
+    font-size:21px;
+    color:#ffe9d7;
+    line-height:1.7;
 }
 
 .signature{
     margin-top:25px;
-    color:#ddd;
-    font-style:italic;
+    color:#e5b176;
+    font-size:18px;
 }
 
-
-/* BOTONES */
-
-button{
-    border:1px solid #e9bf31;
-    background:rgba(15,13,8,.9);
-    color:#ffe071;
-
-    padding:15px 27px;
-
-    border-radius:999px;
-
-    font-size:16px;
-    cursor:pointer;
-
-    margin-top:28px;
-
-    transition:
-        transform .25s,
-        background .25s;
-}
-
-button:hover{
-    transform:translateY(-2px);
-    background:rgba(66,50,10,.8);
-}
-
-
-/* FLORES */
-
-.flower{
+/* DESTELLOS */
+.spark{
     position:absolute;
-
-    width:135px;
-    height:190px;
-
-    --scale:1;
-
-    transform-origin:center bottom;
-
-    opacity:0;
-
-    animation:
-        flowerAppear 1.8s ease-out forwards,
-        flowerSway 3s ease-in-out infinite;
-
-    filter:
-        drop-shadow(
-            0 0 12px rgba(255,200,40,.48)
-        );
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#ffd58d;
+    pointer-events:none;
+    z-index:20;
+    animation:spark .8s ease-out forwards;
 }
 
-@keyframes flowerAppear{
-
+@keyframes spark{
     from{
-        opacity:0;
-        transform:
-            translateY(80px)
-            scale(calc(var(--scale) * .6));
-    }
-
-    to{
         opacity:1;
-        transform:
-            translateY(0)
-            scale(var(--scale));
+        transform:scale(1);
     }
+    to{
+        opacity:0;
+        transform:scale(5);
+    }
+}
 
+/* ANIMACIONES DE FLORES */
+@keyframes flowerAppear{
+    0%{
+        opacity:0;
+        transform:translateY(70px) scale(.45);
+    }
+    60%{
+        opacity:1;
+        transform:translateY(-8px) scale(1.05);
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0) scale(var(--scale));
+    }
 }
 
 @keyframes flowerSway{
-
-    0%,
-    100%{
+    0%,100%{
         margin-left:0;
     }
-
     50%{
-        margin-left:6px;
+        margin-left:7px;
     }
-
 }
 
-
-/* TALLO */
-
-.flower .stem{
-    position:absolute;
-
-    width:7px;
-    height:165px;
-
-    background:#476d31;
-
-    left:64px;
-    top:40px;
-
-    border-radius:7px;
-}
-
-
-/* HOJAS */
-
-.flower .leaf{
-    position:absolute;
-
-    width:42px;
-    height:21px;
-
-    background:#547f37;
-
-    border-radius:100% 0 100% 0;
-}
-
-.flower .leaf.a{
-    left:13px;
-    top:105px;
-
-    transform:rotate(25deg);
-}
-
-.flower .leaf.b{
-    right:7px;
-    top:125px;
-
-    transform:
-        scaleX(-1)
-        rotate(25deg);
-}
-
-
-/* CABEZA */
-
-.head{
-    position:absolute;
-
-    left:17px;
-    top:0;
-
-    width:92px;
-    height:92px;
-}
-
-
-/* PÉTALOS */
-
-.petal{
-    position:absolute;
-
-    width:36px;
-    height:53px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fff079,
-            #ffd21f
-        );
-
-    border-radius:
-        50% 50% 45% 45%;
-
-    left:28px;
-    top:18px;
-
-    transform-origin:
-        18px 26px;
-
-    box-shadow:
-        inset 0 2px 6px rgba(255,255,255,.38),
-        0 2px 6px rgba(120,80,0,.2);
-}
-
-.p1{
-    transform:
-        rotate(0deg)
-        translateY(-28px);
-}
-
-.p2{
-    transform:
-        rotate(60deg)
-        translateY(-28px);
-}
-
-.p3{
-    transform:
-        rotate(120deg)
-        translateY(-28px);
-}
-
-.p4{
-    transform:
-        rotate(180deg)
-        translateY(-28px);
-}
-
-.p5{
-    transform:
-        rotate(240deg)
-        translateY(-28px);
-}
-
-.p6{
-    transform:
-        rotate(300deg)
-        translateY(-28px);
-}
-
-
-/* CENTRO */
-
-.center{
-    position:absolute;
-
-    left:27px;
-    top:27px;
-
-    width:38px;
-    height:38px;
-
-    border-radius:50%;
-
-    background:#9a5d15;
-
-    border:4px solid #e6a31d;
-}
-
-
-/* PÉTALOS QUE CAEN */
-
-.falling{
-    position:absolute;
-
-    top:-60px;
-
-    width:14px;
-    height:22px;
-
-    border-radius:
-        100% 0 100% 0;
-
-    background:#ffd21f;
-
-    opacity:.9;
-
-    animation:
-        fall linear forwards;
-}
-
-@keyframes fall{
-
-    to{
-
-        transform:
-            translate3d(
-                var(--drift),
-                110vh,
-                0
-            )
-            rotate(540deg);
-
-        opacity:.05;
-    }
-
-}
-
-
-/* BRILLOS */
-
-.spark{
-    position:absolute;
-
-    width:5px;
-    height:5px;
-
-    border-radius:50%;
-
-    background:#ffd95b;
-
-    box-shadow:
-        0 0 14px #ffd95b;
-
-    animation:
-        float 4s ease-in-out infinite;
-}
-
-@keyframes float{
-
-    50%{
-        transform:translateY(-25px);
-        opacity:.25;
-    }
-
-}
-
-
-/* CELULAR */
-
-@media(max-width:480px){
-
-    .card,
-    .section{
-        padding:35px 19px;
-    }
-
-    .intro,
-    .section p{
-        font-size:17px;
-    }
-
-    h1{
-        font-size:clamp(40px,12vw,58px);
+/* MÓVIL */
+@media(max-width:600px){
+    .card{
+        width:92%;
+        padding:32px 20px;
+        max-height:82vh;
     }
 
     .flower{
-        width:115px;
-        height:175px;
+        width:105px;
+        height:165px;
+    }
+
+    .flower .head{
+        width:88px;
+        height:88px;
+    }
+
+    .petal{
+        width:40px;
+        height:61px;
+        margin-left:-20px;
+        margin-top:-46px;
     }
 
     .flower .stem{
-        width:6px;
-        height:150px;
-        left:55px;
+        height:112px;
+        width:5px;
     }
 
-    .flower .leaf.a{
-        left:7px;
+    p{
+        font-size:15.5px;
+        line-height:1.65;
     }
 
-    .flower .leaf.b{
-        right:2px;
+    button{
+        font-size:15px;
+        padding:13px 23px;
     }
-
 }
+</style>
+</head>
 
+<body>
 
-/* MENOS MOVIMIENTO */
+<div class="scene">
 
-@media(prefers-reduced-motion:reduce){
+    <div class="stars" id="stars"></div>
 
-    *,
-    *::before,
-    *::after{
-        animation-duration:.001ms!important;
-        animation-iteration-count:1!important;
-    }
+    <div class="flowers" id="flowers"></div>
 
-}
+    <div class="falling" id="falling"></div>
 
-</style></head><body><main class="scene" id="scene"><div class="stars" id="stars"></div>
+    <div class="card" id="card">
 
-<div class="petals" id="petals"></div>
+        <!-- PARTE 1 -->
+        <div class="section show" id="section1">
 
-<div class="flowers" id="flowers"></div>
+            <div class="small">Un detalle hecho especialmente para ti</div>
 
+            <h1>
+                Para mi princesa preciosa<br>
+                María
+            </h1>
 
-<!-- PARTE 1 -->
+            <p class="intro">
+                Hoy es el día de las flores y aunque no pueda darte un ramo
+                en persona, quería hacerte algo especial, algo hecho con
+                todo lo que siento por ti.
+            </p>
 
-<section class="card" id="introCard">
+            <button id="openBtn">Abrir mi regalo</button>
 
-    <div class="small">
-        Un detalle hecho especialmente para ti
+        </div>
+
+        <!-- PARTE 2 -->
+        <div class="section" id="section2">
+
+            <div class="small">Para ti</div>
+
+            <div class="heart">♥</div>
+
+            <h2>María</h2>
+
+            <p>
+                Quería que tuvieras un detalle diferente, algo que no fuera
+                simplemente un ramo de flores, sino un pequeño recuerdo
+                hecho especialmente para ti.
+            </p>
+
+            <p>
+                Porque entre tantas personas, me alegra muchísimo haberte
+                encontrado y poder compartir momentos contigo.
+            </p>
+
+            <p>
+                <span class="highlight">Te mereces cosas bonitas</span>,
+                momentos que te hagan sonreír y personas que sepan valorar
+                la hermosa persona que eres.
+            </p>
+
+            <button id="nextBtn">Hay algo más</button>
+
+        </div>
+
+        <!-- PARTE 3 -->
+        <div class="section" id="section3">
+
+            <div class="small">Un último detalle</div>
+
+            <div class="heart">🌹</div>
+
+            <p class="finalText">
+                Puede que estas flores sean digitales...
+            </p>
+
+            <p class="finalText">
+                pero lo que siento por ti no lo es.
+            </p>
+
+            <p>
+                Espero que cuando veas este pequeño detalle recuerdes que
+                alguien pensó en ti y quiso hacerte sonreír.
+            </p>
+
+            <div class="signature">
+                Con cariño para mi princesa preciosa, María ♥
+            </div>
+
+            <br>
+
+            <button id="restartBtn">Volver al inicio</button>
+
+        </div>
+
     </div>
+</div>
 
-    <h1>
-        Para mi princesa preciosa<br>
-        María
-    </h1>
-
-    <p class="intro">
-        Hoy es el día de las flores y aunque no pueda darte
-        un ramo en persona, quería hacerte algo especial,
-        algo hecho con todo lo que siento por ti.
-    </p>
-
-    <button id="openBtn">
-        Abrir mi regalo
-    </button>
-
-</section>
-
-
-<!-- PARTE 2 -->
-
-<section class="section" id="messageSection">
-
-    <div class="small">
-        Para ti
-    </div>
-
-    <span class="heart">
-        &#10084;
-    </span>
-
-    <p>
-        No sé cómo explicarte todo lo que siento,
-        pero sí sé que cuando estás, todo se siente mejor.
-    </p>
-
-    <p>
-        Gracias por ser esa persona tan especial, por tu sonrisa
-        y por hacerme sentir en paz.
-    </p>
-
-    <p class="quote">
-        Te mereces todo lo bonito del mundo... y más.
-    </p>
-
-    <button id="continueBtn">
-        Hay algo más
-    </button>
-
-</section>
-
-
-<!-- PARTE 3 -->
-
-<section class="section" id="finalSection">
-
-    <div class="small">
-        Un último detalle
-    </div>
-
-    <h2>
-        Puede que estas flores sean digitales...
-    </h2>
-
-    <p>
-        pero lo que siento por ti no lo es.
-    </p>
-
-    <span class="heart">
-        &#10084;
-    </span>
-
-    <p>
-        Gracias por existir, por estar en mi vida y por hacer
-        mis días un poquito más bonitos.
-    </p>
-
-    <p class="quote">
-        Feliz día de las flores, mi amor
-    </p>
-
-    <p class="signature">
-        Siempre contigo.
-    </p>
-
-    <button class="restart" id="restartBtn">
-        Volver al inicio
-    </button>
-
-</section>
-
-</main><script>
-
-/* ELEMENTOS */
-
-const scene = document.getElementById("scene");
-const stars = document.getElementById("stars");
-const flowers = document.getElementById("flowers");
-const petals = document.getElementById("petals");
-
-const introCard = document.getElementById("introCard");
-const messageSection = document.getElementById("messageSection");
-const finalSection = document.getElementById("finalSection");
-
-const openBtn = document.getElementById("openBtn");
-const continueBtn = document.getElementById("continueBtn");
-const restartBtn = document.getElementById("restartBtn");
-
-const reduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-).matches;
-
-
-/* NÚMEROS ALEATORIOS */
-
-function rand(min,max){
-
-    return Math.random() * (max - min) + min;
-
-}
-
-
+<script>
 /* ESTRELLAS */
+const stars = document.getElementById("stars");
 
-for(let i = 0; i < 70; i++){
-
-    const star =
-        document.createElement("span");
-
+for(let i = 0; i < 90; i++){
+    const star = document.createElement("div");
     star.className = "star";
 
-    star.style.left =
-        rand(0,100) + "%";
-
-    star.style.top =
-        rand(0,75) + "%";
-
-    star.style.animationDelay =
-        rand(0,3) + "s";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 3 + "s";
 
     stars.appendChild(star);
-
 }
 
+/* FLORES */
+const flowers = document.getElementById("flowers");
 
-/* CREAR UNA FLOR */
+function random(min,max){
+    return Math.random() * (max-min) + min;
+}
 
 function makeFlower(x,y,scale,delay){
 
-    const flower =
-        document.createElement("div");
-
+    const flower = document.createElement("div");
     flower.className = "flower";
 
-    flower.style.left =
-        x + "%";
+    flower.style.left = x + "%";
+    flower.style.top = y + "px";
+    flower.style.setProperty("--scale",scale);
+    flower.style.animationDelay = delay + "s";
 
-    flower.style.bottom =
-        y + "px";
+    flower.innerHTML = `
+        <div class="head">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
 
-    flower.style.setProperty(
-        "--scale",
-        scale
-    );
-
-    flower.style.animationDelay =
-        delay + "s," +
-        delay + "s";
-
-    flower.innerHTML =
-
-        '<div class="stem"></div>' +
-
-        '<div class="leaf a"></div>' +
-
-        '<div class="leaf b"></div>' +
-
-        '<div class="head">' +
-
-        '<span class="petal p1"></span>' +
-
-        '<span class="petal p2"></span>' +
-
-        '<span class="petal p3"></span>' +
-
-        '<span class="petal p4"></span>' +
-
-        '<span class="petal p5"></span>' +
-
-        '<span class="petal p6"></span>' +
-
-        '<span class="center"></span>' +
-
-        '</div>';
+        <div class="stem"></div>
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
+    `;
 
     flowers.appendChild(flower);
-
 }
 
+/*
+    PRIMERO APARECEN LAS FLORES.
+    Están colocadas altas para que se vean completas.
+*/
 
-/* FLORES ALTAS */
-
-for(let i = 0; i < 22; i++){
+for(let i = 0; i < 24; i++){
 
     makeFlower(
-        rand(-5,93),
-        rand(45,125),
-        rand(.85,1.35),
-        rand(0,.9)
+        random(-5,93),
+        random(45,125),
+        random(.85,1.35),
+        random(0,3.5)
     );
 
 }
 
-
 /* PÉTALOS */
+const falling = document.getElementById("falling");
 
-function burstPetals(count){
+for(let i = 0; i < 28; i++){
 
-    if(reduced){
-        count = 25;
-    }
+    const petal = document.createElement("div");
 
-    for(let i = 0; i < count; i++){
+    petal.className = "fallingPetal";
 
-        const petal =
-            document.createElement("span");
+    petal.style.left = random(0,100) + "%";
+    petal.style.animationDuration = random(5,11) + "s";
+    petal.style.animationDelay = random(2,9) + "s";
+    petal.style.transform = "rotate(" + random(0,360) + "deg)";
 
-        petal.className = "falling";
-
-        petal.style.left =
-            rand(0,100) + "%";
-
-        petal.style.setProperty(
-            "--drift",
-            rand(-180,180) + "px"
-        );
-
-        petal.style.animationDuration =
-            rand(3.5,7) + "s";
-
-        petal.style.animationDelay =
-            rand(0,2.2) + "s";
-
-        petals.appendChild(petal);
-
-        setTimeout(
-            function(){
-                petal.remove();
-            },
-            9000
-        );
-
-    }
-
-
-    /* BRILLOS */
-
-    for(let i = 0; i < 25; i++){
-
-        const spark =
-            document.createElement("span");
-
-        spark.className = "spark";
-
-        spark.style.left =
-            rand(5,95) + "%";
-
-        spark.style.top =
-            rand(10,90) + "%";
-
-        spark.style.animationDelay =
-            rand(0,2) + "s";
-
-        scene.appendChild(spark);
-
-        setTimeout(
-            function(){
-                spark.remove();
-            },
-            6000
-        );
-
-    }
-
+    falling.appendChild(petal);
 }
 
+/* MOSTRAR TARJETA DESPUÉS DE LAS FLORES */
 
-/* ABRIR REGALO */
+const card = document.getElementById("card");
 
-openBtn.addEventListener(
-    "click",
-    function(){
-
-        introCard.style.display = "none";
-
-        messageSection.style.display = "block";
-
-        messageSection.classList.add("show");
-
-        burstPetals(110);
-
-    }
-);
+setTimeout(() => {
+    card.classList.add("show");
+}, 4300);
 
 
-/* SIGUIENTE PARTE */
+/* CAMBIAR SECCIONES */
 
-continueBtn.addEventListener(
-    "click",
-    function(){
+const section1 = document.getElementById("section1");
+const section2 = document.getElementById("section2");
+const section3 = document.getElementById("section3");
 
-        messageSection.classList.remove("show");
+document.getElementById("openBtn").addEventListener("click", () => {
 
-        messageSection.style.display = "none";
+    section1.classList.remove("show");
 
-        finalSection.style.display = "block";
+    setTimeout(() => {
+        section2.classList.add("show");
+    },100);
 
-        finalSection.classList.add("show");
+});
 
-        burstPetals(70);
+document.getElementById("nextBtn").addEventListener("click", () => {
 
-    }
-);
+    section2.classList.remove("show");
 
+    setTimeout(() => {
+        section3.classList.add("show");
+    },100);
 
-/* VOLVER AL INICIO */
+});
 
-restartBtn.addEventListener(
-    "click",
-    function(){
+document.getElementById("restartBtn").addEventListener("click", () => {
 
-        finalSection.classList.remove("show");
+    section3.classList.remove("show");
 
-        finalSection.style.display = "none";
+    setTimeout(() => {
+        section1.classList.add("show");
+    },100);
 
-        messageSection.classList.remove("show");
-
-        messageSection.style.display = "none";
-
-        introCard.style.display = "block";
-
-        introCard.classList.add("show");
-
-        burstPetals(45);
-
-    }
-);
+});
 
 
-/* BRILLO AL TOCAR */
+/* DESTELLOS AL TOCAR */
 
-scene.addEventListener(
-    "click",
-    function(event){
+document.addEventListener("click", function(e){
 
-        if(event.target.closest("button")){
-            return;
-        }
+    const spark = document.createElement("div");
 
-        const spark =
-            document.createElement("span");
+    spark.className = "spark";
 
-        spark.className = "spark";
+    spark.style.left = e.clientX + "px";
+    spark.style.top = e.clientY + "px";
 
-        spark.style.left =
-            event.clientX + "px";
+    document.body.appendChild(spark);
 
-        spark.style.top =
-            event.clientY + "px";
+    setTimeout(() => {
+        spark.remove();
+    },800);
 
-        scene.appendChild(spark);
+});
+</script>
 
-        setTimeout(
-            function(){
-                spark.remove();
-            },
-            3500
-        );
-
-    }
-);
-
-</script></body>
+</body>
 </html>
